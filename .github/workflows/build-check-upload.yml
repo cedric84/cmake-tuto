@@ -1,0 +1,54 @@
+name: build & check the application
+on:
+  push:
+    branches:
+      - github
+jobs:
+  ubuntu-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: build
+        run: python3 cmake_build.py
+      - name: clean
+        run: rm -Rf ./out/build
+      - name: unittest
+        run: ./out/bin/my_app unittest
+      - name: upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: ubuntu-out
+          path: ./out
+  mac-build:
+    runs-on: macos-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: build
+        run: python3 cmake_build.py
+      - name: clean
+        run: rm -Rf ./out/build
+      - name: unittest
+        run: ./out/bin/my_app unittest
+      - name: upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: macos-out
+          path: ./out
+  windows-build:
+    runs-on: windows-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: build
+        run: Start-Process -FilePath "py" -ArgumentList "-3", "cmake_build.py" -Wait -NoNewWindow
+      - name: clean
+        run: Remove-Item out\build -Recurse -Force
+      - name: unittest
+        run: Start-Process -FilePath "out\bin\my_app" -ArgumentList "unittest" -Wait -NoNewWindow
+      - name: upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: windows-out
+          path: .\out
