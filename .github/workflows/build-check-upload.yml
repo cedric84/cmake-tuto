@@ -14,11 +14,11 @@ jobs:
       - name: clean
         run: rm -Rf ./out/build
       - name: unittest
-        run: ./out/bin/my_app unittest
+        run: ./out/install/bin/my_app unittest
       - name: upload
         uses: actions/upload-artifact@v1
         with:
-          name: ubuntu-out
+          name: ubuntu-latest-out
           path: ./out
   mac-build:
     runs-on: macos-latest
@@ -30,11 +30,11 @@ jobs:
       - name: clean
         run: rm -Rf ./out/build
       - name: unittest
-        run: ./out/bin/my_app unittest
+        run: ./out/install/bin/my_app unittest
       - name: upload
         uses: actions/upload-artifact@v1
         with:
-          name: macos-out
+          name: macos-latest-out
           path: ./out
   windows-build:
     runs-on: windows-latest
@@ -46,9 +46,9 @@ jobs:
       - name: clean
         run: Remove-Item out\build -Recurse -Force
       - name: unittest
-        run: Start-Process -FilePath "out\bin\my_app" -ArgumentList "unittest" -Wait -NoNewWindow
+        run: Start-Process -FilePath "out\install\bin\my_app" -ArgumentList "unittest" -Wait -NoNewWindow
       - name: upload
         uses: actions/upload-artifact@v1
         with:
-          name: windows-out
+          name: windows-latest-out
           path: .\out
