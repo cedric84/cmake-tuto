@@ -1,0 +1,6 @@
+version=1
+
+#---List of ignored entries---#
+/.git
+/artemis-wshp.ignore
+/out

@@ -6,7 +6,7 @@ import subprocess
 #---Definitions---#
 CMAKE_SOURCE_DIR		= pathlib.Path(".").resolve()
 CMAKE_BINARY_DIR		= CMAKE_SOURCE_DIR.joinpath("out").joinpath("build")
-CMAKE_INSTALL_PREFIX	= CMAKE_SOURCE_DIR.joinpath("out")
+CMAKE_INSTALL_PREFIX	= CMAKE_SOURCE_DIR.joinpath("out").joinpath("install")
 
 #---Create & change to build directory---#
 shutil.rmtree(str(CMAKE_BINARY_DIR), ignore_errors=True)
@@ -35,4 +35,3 @@ args	= [
 ]
 subprocess.Popen(args).wait()
 del args
-

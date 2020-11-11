@@ -5,4 +5,3 @@ add_executable(my_app
 
 #---Specify the install rules---#
 install(TARGETS my_app DESTINATION bin)
-
