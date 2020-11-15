@@ -1,3 +1,4 @@
+import sys
 import os
 import shutil
 import pathlib
@@ -19,8 +20,10 @@ args	= [
 	"-DCMAKE_INSTALL_PREFIX=" + str(CMAKE_INSTALL_PREFIX),
 	str(CMAKE_SOURCE_DIR),
 ]
-subprocess.Popen(args).wait()
+ret = subprocess.Popen(args).wait()
 del args
+if (0 != ret):
+	sys.exit(ret)
 
 #---Change to source directory---#
 os.chdir(str(CMAKE_SOURCE_DIR))
@@ -33,5 +36,7 @@ args	= [
 	"--target",
 	"install"
 ]
-subprocess.Popen(args).wait()
+ret = subprocess.Popen(args).wait()
 del args
+if (0 != ret):
+	sys.exit(ret)
